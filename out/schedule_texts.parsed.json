@@ -1,0 +1,677 @@
+[
+  {
+    "person": "E",
+    "day": "Monday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "",
+    "section": "BM3",
+    "room": "MP0401"
+  },
+  {
+    "person": "E",
+    "day": "Monday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS133-1",
+    "section": "BM1",
+    "room": "MP0802"
+  },
+  {
+    "person": "E",
+    "day": "Monday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS134-1",
+    "section": "BM6",
+    "room": "MP0504"
+  },
+  {
+    "person": "E",
+    "day": "Monday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "CSS152P",
+    "section": "BM2",
+    "room": "MP0605"
+  },
+  {
+    "person": "E",
+    "day": "Monday",
+    "time_start": "11:40AM",
+    "time_end": "12:50PM",
+    "course": "GED102",
+    "section": "BM4",
+    "room": "ONLINE"
+  },
+  {
+    "person": "E",
+    "day": "Tuesday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "CSS152P",
+    "section": "BM2",
+    "room": "MP0304"
+  },
+  {
+    "person": "E",
+    "day": "Tuesday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS152P",
+    "section": "BM2",
+    "room": "MP0304"
+  },
+  {
+    "person": "E",
+    "day": "Tuesday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS152P",
+    "section": "",
+    "room": "MP0304"
+  },
+  {
+    "person": "E",
+    "day": "Tuesday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "ITS150P",
+    "section": "BM3",
+    "room": "MP0409"
+  },
+  {
+    "person": "E",
+    "day": "Tuesday",
+    "time_start": "11:40AM",
+    "time_end": "12:50PM",
+    "course": "ITS150P",
+    "section": "BM3",
+    "room": "MP0409"
+  },
+  {
+    "person": "E",
+    "day": "Tuesday",
+    "time_start": "12:50PM",
+    "time_end": "02:00PM",
+    "course": "ITS150P",
+    "section": "BM3",
+    "room": "MP0409"
+  },
+  {
+    "person": "E",
+    "day": "Wednesday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "ITS150P",
+    "section": "BM3",
+    "room": "MP0401"
+  },
+  {
+    "person": "E",
+    "day": "Wednesday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS133-1",
+    "section": "BM1",
+    "room": "MP0602"
+  },
+  {
+    "person": "E",
+    "day": "Wednesday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS134-1",
+    "section": "BM6",
+    "room": "MP0504"
+  },
+  {
+    "person": "E",
+    "day": "Wednesday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "CSS152P",
+    "section": "BM2",
+    "room": "MP0605"
+  },
+  {
+    "person": "E",
+    "day": "Wednesday",
+    "time_start": "11:40AM",
+    "time_end": "12:50PM",
+    "course": "GED102",
+    "section": "",
+    "room": "ONLINE"
+  },
+  {
+    "person": "E",
+    "day": "Thursday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "FW04-2",
+    "section": "BM10",
+    "room": "MPOGYM3"
+  },
+  {
+    "person": "E",
+    "day": "Thursday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "FW04-2",
+    "section": "BM10",
+    "room": "MPOGYM3"
+  },
+  {
+    "person": "E",
+    "day": "Thursday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS133-1",
+    "section": "BM1",
+    "room": "MP0602"
+  },
+  {
+    "person": "E",
+    "day": "Thursday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "CSS134-1",
+    "section": "BM6",
+    "room": "MP0504"
+  },
+  {
+    "person": "E",
+    "day": "Thursday",
+    "time_start": "11:40AM",
+    "time_end": "12:50PM",
+    "course": "GED102",
+    "section": "BM4",
+    "room": "ONLINE"
+  },
+  {
+    "person": "E",
+    "day": "Friday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "GED102",
+    "section": "BM6",
+    "room": "ONLINE"
+  },
+  {
+    "person": "E",
+    "day": "Friday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS133-1",
+    "section": "BM4",
+    "room": "MP0322"
+  },
+  {
+    "person": "E",
+    "day": "Friday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS134-1",
+    "section": "BM7",
+    "room": "MP0605"
+  },
+  {
+    "person": "E",
+    "day": "Saturday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "CSS182-01",
+    "section": "BM2",
+    "room": "MP0324"
+  },
+  {
+    "person": "E",
+    "day": "Saturday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS182-01",
+    "section": "",
+    "room": "MP0324"
+  },
+  {
+    "person": "E",
+    "day": "Saturday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS182-01",
+    "section": "BM2",
+    "room": "MP0324"
+  },
+  {
+    "person": "L",
+    "day": "Monday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "GED102",
+    "section": "",
+    "room": "ONLINE"
+  },
+  {
+    "person": "L",
+    "day": "Monday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "ITS150P",
+    "section": "BM7",
+    "room": "MP0401"
+  },
+  {
+    "person": "L",
+    "day": "Monday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS152P",
+    "section": "BM1",
+    "room": "MP0605"
+  },
+  {
+    "person": "L",
+    "day": "Monday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "CSS133-1",
+    "section": "BM4",
+    "room": "MP0322"
+  },
+  {
+    "person": "L",
+    "day": "Monday",
+    "time_start": "11:40AM",
+    "time_end": "12:50PM",
+    "course": "CSS134-1",
+    "section": "BM7",
+    "room": "MP0605"
+  },
+  {
+    "person": "L",
+    "day": "Tuesday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "CSS152P",
+    "section": "BM1",
+    "room": "MP0304"
+  },
+  {
+    "person": "L",
+    "day": "Tuesday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS152P",
+    "section": "BM1",
+    "room": "MP0304"
+  },
+  {
+    "person": "L",
+    "day": "Tuesday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS152P",
+    "section": "BM1",
+    "room": "MP0304"
+  },
+  {
+    "person": "L",
+    "day": "Wednesday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "GED102",
+    "section": "",
+    "room": "ONLINE"
+  },
+  {
+    "person": "L",
+    "day": "Wednesday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "ITS150P",
+    "section": "BM7",
+    "room": "MP0401"
+  },
+  {
+    "person": "L",
+    "day": "Wednesday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS152P",
+    "section": "BM1",
+    "room": "MP0605"
+  },
+  {
+    "person": "L",
+    "day": "Wednesday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "CSS133-1",
+    "section": "",
+    "room": "MP0322"
+  },
+  {
+    "person": "L",
+    "day": "Wednesday",
+    "time_start": "11:40AM",
+    "time_end": "12:50PM",
+    "course": "CSS134-1",
+    "section": "BM7",
+    "room": "MP0605"
+  },
+  {
+    "person": "L",
+    "day": "Thursday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "FW04-2",
+    "section": "BM1",
+    "room": "MPOGYM1"
+  },
+  {
+    "person": "L",
+    "day": "Thursday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "FW04-2",
+    "section": "BM1",
+    "room": "MPOGYM1"
+  },
+  {
+    "person": "L",
+    "day": "Friday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "GED102",
+    "section": "BM6",
+    "room": "ONLINE"
+  },
+  {
+    "person": "L",
+    "day": "Friday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS133-1",
+    "section": "BM4",
+    "room": "MP0322"
+  },
+  {
+    "person": "L",
+    "day": "Friday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS134-1",
+    "section": "BM7",
+    "room": "MP0605"
+  },
+  {
+    "person": "L",
+    "day": "Saturday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "CSS182-01",
+    "section": "BM1",
+    "room": "MP0213"
+  },
+  {
+    "person": "L",
+    "day": "Saturday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS182-01",
+    "section": "BM1",
+    "room": "MP0213"
+  },
+  {
+    "person": "L",
+    "day": "Saturday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS182-01",
+    "section": "BM1",
+    "room": "MP0213"
+  },
+  {
+    "person": "L",
+    "day": "Saturday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "ITS150P",
+    "section": "BM7",
+    "room": "MP0409"
+  },
+  {
+    "person": "L",
+    "day": "Saturday",
+    "time_start": "11:40AM",
+    "time_end": "12:50PM",
+    "course": "ITS150P",
+    "section": "BM7",
+    "room": "MP0409"
+  },
+  {
+    "person": "L",
+    "day": "Saturday",
+    "time_start": "12:50PM",
+    "time_end": "02:00PM",
+    "course": "ITS150P",
+    "section": "BM7",
+    "room": "MP0409"
+  },
+  {
+    "person": "Ze",
+    "day": "Monday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "ITS150P",
+    "section": "BM3",
+    "room": "MP0401"
+  },
+  {
+    "person": "Ze",
+    "day": "Monday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS134-1",
+    "section": "BM2",
+    "room": "MP0607"
+  },
+  {
+    "person": "Ze",
+    "day": "Monday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS133-1",
+    "section": "BM17",
+    "room": "MP0604"
+  },
+  {
+    "person": "Ze",
+    "day": "Monday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "CSS152P",
+    "section": "BM2",
+    "room": "MP0605"
+  },
+  {
+    "person": "Ze",
+    "day": "Tuesday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "CSS152P",
+    "section": "BM2",
+    "room": "MP0304"
+  },
+  {
+    "person": "Ze",
+    "day": "Tuesday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS152P",
+    "section": "BM2",
+    "room": "MP0304"
+  },
+  {
+    "person": "Ze",
+    "day": "Tuesday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS152P",
+    "section": "BM2",
+    "room": "MP0304"
+  },
+  {
+    "person": "Ze",
+    "day": "Tuesday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "GED102",
+    "section": "BM1",
+    "room": "ONLINE"
+  },
+  {
+    "person": "Ze",
+    "day": "Tuesday",
+    "time_start": "11:40AM",
+    "time_end": "12:50PM",
+    "course": "ITS150P",
+    "section": "BM3",
+    "room": "MP0409"
+  },
+  {
+    "person": "Ze",
+    "day": "Tuesday",
+    "time_start": "12:50PM",
+    "time_end": "02:00PM",
+    "course": "ITS150P",
+    "section": "BM3",
+    "room": "MP0409"
+  },
+  {
+    "person": "Ze",
+    "day": "Tuesday",
+    "time_start": "02:00PM",
+    "time_end": "03:10PM",
+    "course": "ITS150P",
+    "section": "BM3",
+    "room": "MP0409"
+  },
+  {
+    "person": "Ze",
+    "day": "Wednesday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "ITS150P",
+    "section": "BM3",
+    "room": "MP0401"
+  },
+  {
+    "person": "Ze",
+    "day": "Wednesday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS134-1",
+    "section": "BM2",
+    "room": "MP0607"
+  },
+  {
+    "person": "Ze",
+    "day": "Wednesday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS133-1",
+    "section": "BM17",
+    "room": "MP0604"
+  },
+  {
+    "person": "Ze",
+    "day": "Wednesday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "CSS152P",
+    "section": "BM2",
+    "room": "MP0605"
+  },
+  {
+    "person": "Ze",
+    "day": "Thursday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "GED102",
+    "section": "BM1",
+    "room": "ONLINE"
+  },
+  {
+    "person": "Ze",
+    "day": "Friday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "CSS134-1",
+    "section": "BM2",
+    "room": "MP0607"
+  },
+  {
+    "person": "Ze",
+    "day": "Friday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS133-1",
+    "section": "BM17",
+    "room": "MP0604"
+  },
+  {
+    "person": "Ze",
+    "day": "Saturday",
+    "time_start": "07:00AM",
+    "time_end": "08:10AM",
+    "course": "CSS182-01",
+    "section": "BM1",
+    "room": "MP0213"
+  },
+  {
+    "person": "Ze",
+    "day": "Saturday",
+    "time_start": "08:10AM",
+    "time_end": "09:20AM",
+    "course": "CSS182-01",
+    "section": "BM1",
+    "room": "MP0213"
+  },
+  {
+    "person": "Ze",
+    "day": "Saturday",
+    "time_start": "09:20AM",
+    "time_end": "10:30AM",
+    "course": "CSS182-01",
+    "section": "BM1",
+    "room": "MP0213"
+  },
+  {
+    "person": "Ze",
+    "day": "Saturday",
+    "time_start": "10:30AM",
+    "time_end": "11:40AM",
+    "course": "FW04-2",
+    "section": "BM13",
+    "room": "MPOGYM3"
+  },
+  {
+    "person": "Ze",
+    "day": "Saturday",
+    "time_start": "11:40AM",
+    "time_end": "12:50PM",
+    "course": "FW04-2",
+    "section": "BM13",
+    "room": "MPOGYM3"
+  },
+  {
+    "person": "Ze",
+    "day": "Saturday",
+    "time_start": "12:50PM",
+    "time_end": "02:00PM",
+    "course": "GED102",
+    "section": "BM1",
+    "room": "ONLINE"
+  }
+]
