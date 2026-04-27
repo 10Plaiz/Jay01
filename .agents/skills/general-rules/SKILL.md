@@ -3,16 +3,27 @@ name: general-rules
 description: Use when prompted with "Antigravity Agent", when modifying ANY code in the 1000 JAY project, or when making architectural decisions.
 ---
 
-# 1000 JAY: Antigravity Agent Core Directives
+# 1000 JAY: Antigravity Agent Core Directives & Project Context
 
-## Overview
-This skill enforces the absolute rules for the 1000 JAY project under the "Antigravity Agent" persona. It guarantees zero-defect code changes, strict API handling, and surgical precision in edits. This skill is your operating system when working on 1000 JAY.
+## Project Summary
+A Python-based OCR utility that extracts text from schedule images using the OCR.space API and aggregates results into a CSV.
 
-## When to Use
-- You receive a prompt mentioning "Antigravity Agent".
-- You are modifying `main.py`, `helper.py`, or any core system file.
-- You are implementing new features from the Roadmap (Phase 1-4).
-- You are writing tests or adding OCR data extraction features.
+## Tech Stack
+- **Language**: Python 3.12+
+- **Libraries**: `requests` (for API calls), `csv`, `json`, `os`.
+- **External Service**: OCR.space API.
+
+## Critical Commands
+- **Run Extraction**: `python main.py`
+- **Install Dependencies**: `pip install requests`
+- **Environment Setup**: Create a `.env` file with `OCR_API_KEY=your_key_here`.
+
+## Project Structure
+- `main.py`: Entry point, orchestrates file scanning and CSV writing.
+- `helper.py`: Wrapper for OCR.space API calls.
+- `schedule_images/`: Input directory for source images.
+- `schedule_texts.csv`: Output file generated after a run.
+- `docs/`: Technical documentation and API references.
 
 ## The Antigravity Flow
 ```dot
@@ -35,11 +46,11 @@ digraph antigravity_flow {
 ## Core Engineering Mandates (The Iron Law)
 
 ### 1. Surgical Edits & Context Efficiency
-**Rule:** NEVER rewrite entire files for small logic changes. Use targeted `replace` operations.
+**Rule:** NEVER rewrite entire files for small logic changes. Use targeted `replace` operations. When investigating, read multiple files in parallel to save turns.
 **Why:** Full rewrites break existing functionality, introduce unintended bugs, and waste context window tokens.
 
 ### 2. Absolute Security
-**Rule:** NEVER hardcode API keys. Always use `os.environ.get("OCR_API_KEY")`.
+**Rule:** NEVER hardcode API keys. Always use `os.environ.get("OCR_API_KEY")`. Do not commit `.env` files or any file containing credentials.
 **Why:** Committing `.env` files or hardcoded keys compromises the system. Security is non-negotiable.
 
 ### 3. Bulletproof OCR Validation
@@ -58,6 +69,9 @@ digraph antigravity_flow {
 **Rule:** Any change to text extraction logic MUST be verified with a mock JSON response or a sample image from the `schedule_images/` directory.
 **Why:** Parsing changes cannot be validated by reading code alone. You must observe the output.
 
+### 7. Coding Standards & Conventions
+**Rule:** Use `snake_case` for all functions and variables. Keep `helper.py` purely functional (stateless). Ensure all file paths are handled using `os.path.join` for cross-platform compatibility.
+
 ## Quick Reference
 
 | Action | Antigravity Requirement |
@@ -66,6 +80,7 @@ digraph antigravity_flow {
 | Making an API call | Must wrap in `try...except requests.exceptions.RequestException`. |
 | Updating an existing file | Must use targeted replacements, not full rewrites. |
 | Handling credentials | Must use `os.environ.get()` or `.env` file reading. |
+| File Paths | Must use `os.path.join()`. |
 
 ## Rationalization Table
 
