@@ -131,8 +131,7 @@ footer { display: none !important; }
     font-size: 19px;
     line-height: 1.55;
     color: var(--navy-soft);
-    max-width: 560px;
-    margin: 0 auto 40px;
+    width: 100%;
     font-weight: 400;
     animation: fadeUp 0.7s ease-out 0.2s both;
 }
