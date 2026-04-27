@@ -1,10 +1,8 @@
 """
-Schedule Advisor — Streamlit Chatbot
-=====================================
-A premium chatbot UI powered by Gemini 2.5 Flash that analyses
-class-schedule CSVs from the ``out/`` directory and answers
-natural-language queries about availability, conflicts, and
-attendance.
+Schedule Advisor — Streamlit Landing Page + Chatbot
+=====================================================
+A premium landing-page-first experience powered by Gemini 2.5 Flash
+that analyses class-schedule CSVs and answers natural-language queries.
 """
 
 import glob
@@ -27,245 +25,399 @@ from schedule_parser import (
 
 # ── Page configuration ──────────────────────────────────────────────
 st.set_page_config(
-    page_title="Schedule Advisor",
+    page_title="Schedule Advisor · 1000 JAY",
     page_icon="📅",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 # ── Premium CSS ─────────────────────────────────────────────────────
 st.markdown(
     """
 <style>
-/* ─── Premium Typography & Font Imports ─── */
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=clash-display@500,600,700&display=swap');
+/* ─── Font Import ─── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
-    --theme-text-primary: #0a0f18;
-    --theme-text-secondary: #4a5568;
-    --theme-text-weak: rgba(10, 15, 24, 0.5);
-    
-    --theme-bg-canvas: #f8fafc;
-    --theme-bg-glass: rgba(255, 255, 255, 0.75);
-    --theme-bg-glass-hover: rgba(255, 255, 255, 0.9);
-    
-    --theme-accent: #2563eb;
-    --theme-accent-hover: #1d4ed8;
-    --theme-accent-glow: rgba(37, 99, 235, 0.2);
-    
-    --theme-border: rgba(10, 15, 24, 0.08);
-    --theme-border-glow: rgba(37, 99, 235, 0.15);
-    
-    --shadow-sm: 0 2px 8px -2px rgba(10, 15, 24, 0.05), inset 0 1px 0 rgba(255,255,255,0.6);
-    --shadow-md: 0 4px 20px -4px rgba(10, 15, 24, 0.08), inset 0 1px 0 rgba(255,255,255,0.8);
-    --shadow-lg: 0 12px 32px -8px rgba(10, 15, 24, 0.12), inset 0 1px 0 rgba(255,255,255,0.9);
-    --shadow-float: 0 20px 40px -12px rgba(37, 99, 235, 0.15), 0 0 0 1px var(--theme-border-glow);
+    --navy: #181d26;
+    --navy-soft: rgba(24,29,38,0.72);
+    --navy-weak: rgba(24,29,38,0.48);
+    --blue: #1b61c9;
+    --blue-hover: #1550a8;
+    --blue-glow: rgba(27,97,201,0.12);
+    --blue-tint: rgba(27,97,201,0.06);
+    --white: #ffffff;
+    --surface: #f8fafc;
+    --border: #e0e2e6;
+    --border-hover: #c8ccd2;
+    --green: #006400;
+
+    --shadow-card: 0 0 1px rgba(0,0,0,0.32), 0 0 2px rgba(0,0,0,0.08), 0 1px 3px rgba(45,127,249,0.28), 0 0 0 0.5px rgba(0,0,0,0.06) inset;
+    --shadow-soft: 0 0 20px rgba(15,48,106,0.05);
+    --shadow-hover: 0 4px 16px rgba(27,97,201,0.18), 0 0 1px rgba(0,0,0,0.2);
+    --shadow-float: 0 12px 32px rgba(27,97,201,0.14), 0 0 0 1px rgba(27,97,201,0.08);
+
+    --radius-sm: 2px;
+    --radius-btn: 12px;
+    --radius-card: 16px;
+    --radius-section: 24px;
+    --radius-lg: 32px;
 }
 
-/* Base Styles */
+/* ─── Base Reset ─── */
 html, body, [class*="st-"] {
-    font-family: 'Satoshi', -apple-system, sans-serif !important;
-    color: var(--theme-text-primary) !important;
-    letter-spacing: 0.2px;
+    font-family: 'DM Sans', -apple-system, system-ui, 'Segoe UI', sans-serif !important;
+    color: var(--navy) !important;
+    letter-spacing: 0.12px;
+}
+h1, h2, h3, h4, h5, h6,
+[data-testid="stMetricLabel"] > div {
+    font-family: 'Space Grotesk', 'DM Sans', sans-serif !important;
+    color: var(--navy) !important;
 }
 
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Clash Display', sans-serif !important;
-    letter-spacing: -0.01em !important;
-    color: var(--theme-text-primary) !important;
-}
-
-h1 {
-    font-size: 3rem !important;
-    font-weight: 700 !important;
-    background: linear-gradient(135deg, #0a0f18 0%, #3b82f6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Core App Canvas */
+/* ─── App Canvas ─── */
 .stApp {
-    background: var(--theme-bg-canvas) !important;
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.08) 0%, transparent 40%) !important;
-    background-attachment: fixed !important;
+    background: var(--white) !important;
 }
 
-/* Sidebar */
+/* ─── Hide default header & footer ─── */
+header[data-testid="stHeader"] { background: transparent !important; }
+footer { display: none !important; }
+#MainMenu { visibility: hidden; }
+
+/* ─── Hero Section ─── */
+.hero-wrapper {
+    padding: 80px 0 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.hero-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, var(--blue-tint) 0%, transparent 70%),
+        radial-gradient(circle at 80% 90%, rgba(27,97,201,0.04) 0%, transparent 50%);
+    pointer-events: none;
+}
+.hero-badge {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--blue);
+    letter-spacing: 0.4px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease-out both;
+}
+.hero-title {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--navy);
+    margin: 0 0 20px;
+    animation: fadeUp 0.7s ease-out 0.1s both;
+}
+.hero-title span {
+    color: var(--blue);
+}
+.hero-subtitle {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--navy-soft);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    font-weight: 400;
+    animation: fadeUp 0.7s ease-out 0.2s both;
+}
+.hero-cta-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    animation: fadeUp 0.7s ease-out 0.3s both;
+}
+
+/* ─── Feature Cards ─── */
+.features-section {
+    padding: 48px 0 64px;
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.feature-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 32px 28px;
+    transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+    box-shadow: var(--shadow-soft);
+    animation: fadeUp 0.7s ease-out both;
+}
+.feature-card:nth-child(1) { animation-delay: 0.15s; }
+.feature-card:nth-child(2) { animation-delay: 0.25s; }
+.feature-card:nth-child(3) { animation-delay: 0.35s; }
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--border-hover);
+}
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--blue-tint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+.feature-card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    letter-spacing: 0.08px;
+}
+.feature-card p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--navy-soft);
+    margin: 0;
+    letter-spacing: 0.08px;
+}
+
+/* ─── Stats Row ─── */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    padding: 20px 0;
+}
+.stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 24px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.stat-card:hover {
+    border-color: var(--blue);
+    box-shadow: var(--shadow-card);
+}
+.stat-value {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1;
+    margin-bottom: 6px;
+}
+.stat-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy-weak);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* ─── Divider ─── */
+.section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+}
+
+/* ─── Sidebar ─── */
 section[data-testid="stSidebar"] {
-    background: rgba(248, 250, 252, 0.6) !important;
-    backdrop-filter: blur(24px) saturate(180%) !important;
-    border-right: 1px solid var(--theme-border) !important;
+    background: var(--white) !important;
+    border-right: 1px solid var(--border) !important;
 }
 section[data-testid="stSidebar"] .stMarkdown h3 {
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
-    font-size: 1.25rem;
-    letter-spacing: 0.5px;
+    font-size: 15px;
+    letter-spacing: 0.6px;
     text-transform: uppercase;
+    color: var(--navy-weak);
 }
 
-/* Premium Buttons */
+/* ─── Buttons ─── */
 .stButton > button {
-    background: var(--theme-bg-glass) !important;
-    backdrop-filter: blur(12px) !important;
-    border: 1px solid var(--theme-border) !important;
-    border-radius: 14px !important;
-    color: var(--theme-text-primary) !important;
-    font-weight: 600 !important;
-    padding: 16px 28px !important;
-    box-shadow: var(--shadow-sm) !important;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border-radius: var(--radius-btn) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.08px !important;
+    padding: 12px 24px !important;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1) !important;
+    border: 1px solid var(--border) !important;
+    background: var(--white) !important;
+    color: var(--navy) !important;
+    box-shadow: var(--shadow-soft) !important;
 }
 .stButton > button:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: var(--shadow-lg) !important;
-    border-color: var(--theme-border-glow) !important;
-    background: #ffffff !important;
+    border-color: var(--blue) !important;
+    box-shadow: var(--shadow-card) !important;
+    transform: translateY(-1px);
 }
 .stButton > button[kind="primary"] {
-    background: var(--theme-accent) !important;
-    color: #ffffff !important;
+    background: var(--blue) !important;
+    color: var(--white) !important;
     border: none !important;
-    box-shadow: 0 4px 16px var(--theme-accent-glow), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+    box-shadow: 0 2px 8px var(--blue-glow) !important;
 }
 .stButton > button[kind="primary"]:hover {
-    background: var(--theme-accent-hover) !important;
-    box-shadow: 0 8px 24px rgba(37,99,235,0.3), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+    background: var(--blue-hover) !important;
+    box-shadow: 0 6px 20px rgba(27,97,201,0.25) !important;
 }
 
-/* Glassmorphic Metrics */
+/* ─── Metrics ─── */
 [data-testid="stMetric"] {
-    background: var(--theme-bg-glass) !important;
-    backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid var(--theme-border) !important;
-    border-radius: 20px !important;
-    padding: 24px !important;
-    box-shadow: var(--shadow-md) !important;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-card) !important;
+    padding: 20px !important;
+    transition: all 0.3s ease !important;
 }
 [data-testid="stMetric"]:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-float) !important;
-    background: #ffffff !important;
+    border-color: var(--blue) !important;
+    box-shadow: var(--shadow-card) !important;
 }
 [data-testid="stMetricValue"] > div {
-    font-family: 'Clash Display', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 2.5rem !important;
-    color: var(--theme-accent) !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 2rem !important;
+    color: var(--blue) !important;
 }
 [data-testid="stMetricLabel"] > div {
-    font-size: 0.9rem !important;
+    font-size: 12px !important;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--theme-text-secondary) !important;
+    letter-spacing: 0.8px;
+    color: var(--navy-weak) !important;
     font-weight: 500;
 }
 
-/* Chat Input */
+/* ─── Chat Input ─── */
 .stChatInput > div {
-    border-radius: 24px !important;
-    border: 1px solid var(--theme-border) !important;
-    background: rgba(255, 255, 255, 0.8) !important;
-    backdrop-filter: blur(20px) !important;
-    box-shadow: var(--shadow-lg) !important;
-    transition: all 0.4s ease !important;
-    padding: 4px 8px !important;
-}
-.stChatInput > div:focus-within {
-    border-color: var(--theme-accent) !important;
-    box-shadow: var(--shadow-float) !important;
-    transform: translateY(-2px);
-    background: #ffffff !important;
-}
-
-/* Chat Messages */
-[data-testid="stChatMessage"] {
-    background: var(--theme-bg-glass) !important;
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--theme-border);
-    border-radius: 20px;
-    padding: 24px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-md);
-    animation: messageReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-}
-[data-testid="stChatMessage"] * {
-    color: var(--theme-text-primary) !important;
-}
-
-/* Expanders & DataFrames */
-[data-testid="stExpander"] {
-    background: var(--theme-bg-glass) !important;
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--theme-border) !important;
-    border-radius: 16px !important;
-    box-shadow: var(--shadow-sm) !important;
-}
-[data-testid="stDataFrame"] {
-    border-radius: 12px;
-    border: 1px solid var(--theme-border);
-    box-shadow: var(--shadow-md);
-}
-
-/* Recommendation Cards */
-.rec-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(248,250,252,0.8));
-    border: 1px solid rgba(37,99,235,0.1);
-    border-left: 4px solid var(--theme-accent);
-    border-radius: 16px;
-    padding: 20px 24px;
-    margin-bottom: 16px;
-    font-size: 1.05rem;
-    line-height: 1.6;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
-}
-.rec-card:hover {
-    transform: translateX(4px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(37,99,235,0.2);
-}
-
-/* Custom Selectbox */
-div[data-baseweb="select"] > div {
-    border-radius: 14px !important;
-    border: 1px solid var(--theme-border) !important;
-    background: rgba(255, 255, 255, 0.7) !important;
-    backdrop-filter: blur(12px) !important;
-    box-shadow: var(--shadow-sm) !important;
+    border-radius: var(--radius-btn) !important;
+    border: 1px solid var(--border) !important;
+    background: var(--white) !important;
+    box-shadow: var(--shadow-soft) !important;
     transition: all 0.3s ease !important;
 }
+.stChatInput > div:focus-within {
+    border-color: var(--blue) !important;
+    box-shadow: var(--shadow-card) !important;
+}
+
+/* ─── Chat Messages ─── */
+[data-testid="stChatMessage"] {
+    background: var(--surface) !important;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-soft);
+    animation: messageIn 0.4s ease-out backwards;
+}
+[data-testid="stChatMessage"] * {
+    color: var(--navy) !important;
+}
+
+/* ─── Expanders & DataFrames ─── */
+[data-testid="stExpander"] {
+    background: var(--white) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-btn) !important;
+    box-shadow: var(--shadow-soft) !important;
+}
+[data-testid="stDataFrame"] {
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--border);
+}
+
+/* ─── Recommendation Cards ─── */
+.rec-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--blue);
+    border-radius: var(--radius-btn);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.55;
+    letter-spacing: 0.08px;
+    transition: all 0.25s ease;
+}
+.rec-card:hover {
+    border-color: var(--border-hover);
+    border-left-color: var(--blue);
+    box-shadow: var(--shadow-card);
+    transform: translateX(3px);
+}
+
+/* ─── Selectbox ─── */
+div[data-baseweb="select"] > div {
+    border-radius: var(--radius-btn) !important;
+    border: 1px solid var(--border) !important;
+    background: var(--white) !important;
+    transition: all 0.25s ease !important;
+}
 div[data-baseweb="select"] > div:hover {
-    border-color: var(--theme-accent) !important;
-    background: #ffffff !important;
+    border-color: var(--blue) !important;
 }
 
-/* Animations */
+/* ─── Animations ─── */
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); filter: blur(8px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-@keyframes messageReveal {
-    from { opacity: 0; transform: translateY(16px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes messageIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Global Noise Overlay (Pointer-events none) */
-.noise-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0.04;
-    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+/* ─── Chat Section Header ─── */
+.chat-header {
+    padding: 32px 0 8px;
+}
+.chat-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 0;
+}
+.chat-header p {
+    font-size: 15px;
+    color: var(--navy-soft);
+    margin: 6px 0 0;
+    letter-spacing: 0.08px;
+}
+
+/* ─── Footer ─── */
+.app-footer {
+    text-align: center;
+    padding: 40px 0 24px;
+    color: var(--navy-weak);
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+}
+.app-footer a {
+    color: var(--blue);
+    text-decoration: none;
 }
 </style>
-<div class="noise-overlay"></div>
 """,
     unsafe_allow_html=True,
 )
@@ -295,6 +447,8 @@ if "schedule_context" not in st.session_state:
     st.session_state.schedule_context = ""
 if "gemini_client" not in st.session_state:
     st.session_state.gemini_client = None
+if "show_chat" not in st.session_state:
+    st.session_state.show_chat = False
 
 
 # ── Gemini client init ──────────────────────────────────────────────
@@ -320,7 +474,7 @@ csv_files = sorted(glob.glob(os.path.join(OUT_DIR, "*.csv")))
 #  SIDEBAR
 # ══════════════════════════════════════════════════════════════════════
 with st.sidebar:
-    st.markdown("### 📅 Schedule Advisor")
+    st.markdown("### Schedule Advisor")
     st.caption("Powered by Gemini 2.5 Flash")
     st.markdown("---")
 
@@ -333,20 +487,20 @@ with st.sidebar:
         st.stop()
 
     selected_csv = st.selectbox(
-        "📂 Schedule CSV",
+        "Schedule CSV",
         csv_files,
         format_func=lambda p: os.path.basename(p),
     )
 
     # Load / parse button ────────────────────────────────────────────
-    load_clicked = st.button("⚡ Load & Parse Schedule", type="primary", use_container_width=True)
+    load_clicked = st.button("Load & Parse Schedule", type="primary", use_container_width=True)
 
     if load_clicked or st.session_state.schedule_entries is not None:
         if st.session_state.schedule_entries is None:
             # ── Caching logic ───────────────────────────────────────
             cache_file = selected_csv.replace(".csv", ".parsed.json")
             cached_data = None
-            
+
             # Check if cache exists and is newer than CSV
             if os.path.exists(cache_file) and os.path.getmtime(cache_file) >= os.path.getmtime(selected_csv):
                 try:
@@ -356,49 +510,51 @@ with st.sidebar:
                     pass
 
             if cached_data:
+                from schedule_parser import ScheduleEntry
                 st.session_state.schedule_entries = [
-                    from_dict(ScheduleEntry, item) if 'from_dict' in globals() else ScheduleEntry(**item)
-                    for item in cached_data
+                    ScheduleEntry(**item) for item in cached_data
                 ]
                 st.session_state.schedule_context = build_schedule_context(st.session_state.schedule_entries)
-                st.toast("✅ Loaded from cache!", icon="💾")
+                st.session_state.show_chat = True
+                st.toast("Loaded from cache!", icon="✅")
             else:
                 if not _ensure_client():
                     st.stop()
-                with st.spinner("🔄 Parsing schedule with Gemini…"):
+                with st.spinner("Parsing schedule with Gemini…"):
                     raw_rows = load_csv(selected_csv)
                     entries = parse_with_gemini(
                         st.session_state.gemini_client, raw_rows
                     )
                     if not entries:
-                        st.error("❌ Failed to parse schedule. Gemini might be down (503). Try again later.")
+                        st.error("Failed to parse schedule. Gemini might be down (503). Try again later.")
                         st.stop()
-                    
+
                     st.session_state.schedule_entries = entries
                     st.session_state.schedule_context = build_schedule_context(entries)
-                    
+                    st.session_state.show_chat = True
+
                     # Save to cache
                     try:
                         with open(cache_file, "w") as f:
                             json.dump(entries_to_dicts(entries), f, indent=2)
                     except Exception:
                         pass
-                    
-                    st.toast("✅ Schedule parsed and cached!", icon="📅")
+
+                    st.toast("Schedule parsed and cached!", icon="✅")
 
         entries = st.session_state.schedule_entries
         persons = sorted(set(e.person for e in entries))
 
         # Summary metrics ────────────────────────────────────────────
         st.markdown("---")
-        st.markdown("#### 📊 Overview")
+        st.markdown("#### Overview")
 
         col1, col2 = st.columns(2)
         col1.metric("People", len(persons))
         col2.metric("Classes", len(entries))
 
         # Per-person breakdown ────────────────────────────────────────
-        st.markdown("#### 👥 Per Person")
+        st.markdown("#### Per Person")
         for person in persons:
             person_count = sum(1 for e in entries if e.person == person)
             busy_days = len(set(e.day for e in entries if e.person == person))
@@ -410,28 +566,110 @@ with st.sidebar:
 
         # Reload action ──────────────────────────────────────────────
         st.markdown("---")
-        if st.button("🔄 Reload Data", use_container_width=True):
+        if st.button("Reload Data", use_container_width=True):
             st.session_state.schedule_entries = None
             st.session_state.schedule_context = ""
             st.session_state.messages = []
+            st.session_state.show_chat = False
             st.rerun()
 
 
 # ══════════════════════════════════════════════════════════════════════
-#  MAIN CHAT AREA
+#  LANDING PAGE (shown when no schedule is loaded)
 # ══════════════════════════════════════════════════════════════════════
-st.title("📅 Schedule Advisor")
-st.caption(
-    "Ask me about free slots, class conflicts, attendance, and scheduling recommendations."
-)
+if not st.session_state.show_chat or st.session_state.schedule_entries is None:
+    # Hero
+    st.markdown("""
+    <div class="hero-wrapper">
+        <div class="hero-badge">AI-Powered Scheduling · Built with Gemini 2.5 Flash</div>
+        <h1 class="hero-title">Your schedule,<br><span>intelligently organized.</span></h1>
+        <p class="hero-subtitle">
+            Upload class schedules, ask natural-language questions, and get instant
+            insights about availability, conflicts, and the best times to meet.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-# Guard: schedule must be loaded ──────────────────────────────────────
-if st.session_state.schedule_entries is None:
-    st.info(
-        "👈 **Load a schedule CSV** from the sidebar to get started.",
-        icon="📂",
-    )
+    # Feature Cards
+    st.markdown("""
+    <div class="features-section">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h4>Smart Queries</h4>
+                <p>Ask questions in plain English. Find free slots, check conflicts, or discover common availability across your entire group.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h4>Schedule Analytics</h4>
+                <p>See attendance heatmaps, busiest time slots, and per-person breakdowns — all derived automatically from your data.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h4>Instant Parsing</h4>
+                <p>OCR-extracted schedule images are parsed by Gemini into structured data, cached locally for lightning-fast reloads.</p>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # CTA
+    st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+
+    col_l, col_c, col_r = st.columns([1, 2, 1])
+    with col_c:
+        st.info(
+            "**Get started →** Open the sidebar and load a schedule CSV to begin chatting with your advisor.",
+            icon="📂",
+        )
+
+    # Footer
+    st.markdown("""
+    <div class="app-footer">
+        Schedule Advisor · 1000 JAY &nbsp;·&nbsp; Powered by <a href="https://deepmind.google/technologies/gemini/">Gemini 2.5 Flash</a>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.stop()
+
+
+# ══════════════════════════════════════════════════════════════════════
+#  CHAT AREA (shown after schedule is loaded)
+# ══════════════════════════════════════════════════════════════════════
+
+entries = st.session_state.schedule_entries
+persons = sorted(set(e.person for e in entries))
+
+# Stats bar
+st.markdown(f"""
+<div class="stats-row">
+    <div class="stat-card">
+        <div class="stat-value">{len(persons)}</div>
+        <div class="stat-label">People</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{len(entries)}</div>
+        <div class="stat-label">Classes</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{len(set(e.course for e in entries))}</div>
+        <div class="stat-label">Courses</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{len(set(e.day for e in entries))}</div>
+        <div class="stat-label">Active Days</div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="chat-header">
+    <h2>Schedule Advisor</h2>
+    <p>Ask about free slots, class conflicts, attendance, and scheduling recommendations.</p>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
 
 # ── Helper: render a single assistant message ───────────────────────
@@ -443,13 +681,13 @@ def _render_assistant_msg(msg: dict) -> None:
     # Query parameters expander
     qp = msg.get("query_params")
     if qp:
-        with st.expander("🔍 Structured Query Parameters", expanded=False):
+        with st.expander("Structured Query Parameters", expanded=False):
             st.json(qp)
 
     # Results table
     results = msg.get("results")
     if results:
-        with st.expander(f"📋 Results ({len(results)} rows)", expanded=True):
+        with st.expander(f"Results ({len(results)} rows)", expanded=True):
             df = pd.DataFrame(results)
             st.dataframe(df, use_container_width=True, hide_index=True)
 
