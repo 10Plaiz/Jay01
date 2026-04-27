@@ -37,227 +37,235 @@ st.set_page_config(
 st.markdown(
     """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+/* ─── Premium Typography & Font Imports ─── */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=clash-display@500,600,700&display=swap');
 
 :root {
-    --accent: #1b61c9;
-    --accent-light: #254fad;
-    --surface: #ffffff;
-    --surface2: #f8fafc;
-    --card-bg: #ffffff;
-    --card-border: #e0e2e6;
-    --text-primary: #181d26;
-    --text-muted: #333333;
-    --text-weak: rgba(4,14,32,0.69);
-    --shadow-blue: rgba(0,0,0,0.32) 0px 0px 1px, rgba(0,0,0,0.08) 0px 0px 2px, rgba(45,127,249,0.28) 0px 1px 3px, rgba(0,0,0,0.06) 0px 0px 0px 0.5px inset;
-    --shadow-soft: rgba(15,48,106,0.05) 0px 0px 20px;
+    --theme-text-primary: #0a0f18;
+    --theme-text-secondary: #4a5568;
+    --theme-text-weak: rgba(10, 15, 24, 0.5);
+    
+    --theme-bg-canvas: #f8fafc;
+    --theme-bg-glass: rgba(255, 255, 255, 0.75);
+    --theme-bg-glass-hover: rgba(255, 255, 255, 0.9);
+    
+    --theme-accent: #2563eb;
+    --theme-accent-hover: #1d4ed8;
+    --theme-accent-glow: rgba(37, 99, 235, 0.2);
+    
+    --theme-border: rgba(10, 15, 24, 0.08);
+    --theme-border-glow: rgba(37, 99, 235, 0.15);
+    
+    --shadow-sm: 0 2px 8px -2px rgba(10, 15, 24, 0.05), inset 0 1px 0 rgba(255,255,255,0.6);
+    --shadow-md: 0 4px 20px -4px rgba(10, 15, 24, 0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+    --shadow-lg: 0 12px 32px -8px rgba(10, 15, 24, 0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+    --shadow-float: 0 20px 40px -12px rgba(37, 99, 235, 0.15), 0 0 0 1px var(--theme-border-glow);
 }
 
+/* Base Styles */
 html, body, [class*="st-"] {
-    font-family: 'Haas', -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif !important;
-    letter-spacing: 0.18px;
+    font-family: 'Satoshi', -apple-system, sans-serif !important;
+    color: var(--theme-text-primary) !important;
+    letter-spacing: 0.2px;
 }
 
-/* Force Light Mode / Airtable canvas */
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Clash Display', sans-serif !important;
+    letter-spacing: -0.01em !important;
+    color: var(--theme-text-primary) !important;
+}
+
+h1 {
+    font-size: 3rem !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #0a0f18 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Core App Canvas */
 .stApp {
-    background: var(--surface) !important;
-}
-.stApp, .stApp p, .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6, .stApp span, .stApp div {
-    color: var(--text-primary);
+    background: var(--theme-bg-canvas) !important;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.08) 0%, transparent 40%) !important;
+    background-attachment: fixed !important;
 }
 
-/* ─── Sidebar ─── */
+/* Sidebar */
 section[data-testid="stSidebar"] {
-    background: var(--surface2) !important;
-    border-right: 1px solid var(--card-border);
+    background: rgba(248, 250, 252, 0.6) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    border-right: 1px solid var(--theme-border) !important;
 }
 section[data-testid="stSidebar"] .stMarkdown h3 {
-    background: none;
-    -webkit-text-fill-color: var(--text-primary);
-    color: var(--text-primary) !important;
-    font-weight: 700;
-    letter-spacing: 0.12px;
-}
-section[data-testid="stSidebar"] .stMarkdown p {
-    color: var(--text-muted) !important;
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-/* ─── Metric cards ─── */
-[data-testid="stMetric"] {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 18px 20px;
-    box-shadow: var(--shadow-soft);
-    transition: box-shadow .2s, border-color .2s;
+/* Premium Buttons */
+.stButton > button {
+    background: var(--theme-bg-glass) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid var(--theme-border) !important;
+    border-radius: 14px !important;
+    color: var(--theme-text-primary) !important;
+    font-weight: 600 !important;
+    padding: 16px 28px !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
-[data-testid="stMetric"]:hover {
-    border-color: var(--accent);
-    box-shadow: var(--shadow-blue);
+.stButton > button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-lg) !important;
+    border-color: var(--theme-border-glow) !important;
+    background: #ffffff !important;
 }
-[data-testid="stMetricLabel"] > div {
-    color: var(--text-muted) !important;
-    font-size: 14px !important;
-    letter-spacing: 0.28px !important;
-}
-[data-testid="stMetricValue"] > div {
-    font-weight: 700;
-    font-size: 1.8rem !important;
-    background: none;
-    -webkit-text-fill-color: var(--text-primary);
-    color: var(--text-primary) !important;
-    letter-spacing: normal !important;
-}
-[data-testid="stMetricDelta"] > div {
-    color: var(--text-weak) !important;
-}
-
-/* ─── Header ─── */
-h1 {
-    background: none;
-    -webkit-text-fill-color: var(--text-primary);
-    color: var(--text-primary) !important;
-    font-weight: 900 !important;
-    letter-spacing: normal !important;
-}
-
-/* ─── Chat input ─── */
-.stChatInput > div {
-    border: 1px solid var(--card-border) !important;
-    border-radius: 12px !important;
-    background: var(--card-bg) !important;
-    box-shadow: var(--shadow-soft) !important;
-    transition: border-color .2s, box-shadow .2s;
-}
-.stChatInput > div:focus-within {
-    border-color: var(--accent) !important;
-    box-shadow: var(--shadow-blue) !important;
-}
-
-/* ─── Chat messages ─── */
-[data-testid="stChatMessage"] {
-    border-radius: 16px;
-    border: 1px solid var(--card-border);
-    background: var(--card-bg) !important;
-    box-shadow: var(--shadow-soft);
-    padding: 16px 20px;
-    margin-bottom: 8px;
-    animation: fadeSlideIn .35s ease-out;
-}
-@keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ─── Buttons ─── */
-.stButton > button[kind="primary"],
-.stButton > button[data-testid="stBaseButton-primary"] {
-    background: var(--accent) !important;
+.stButton > button[kind="primary"] {
+    background: var(--theme-accent) !important;
     color: #ffffff !important;
     border: none !important;
-    border-radius: 12px !important;
-    font-weight: 500;
-    letter-spacing: 0.08px;
-    padding: 16px 24px !important;
-    box-shadow: var(--shadow-soft) !important;
-    transition: transform .15s, box-shadow .2s;
+    box-shadow: 0 4px 16px var(--theme-accent-glow), inset 0 1px 0 rgba(255,255,255,0.2) !important;
 }
-.stButton > button[kind="primary"]:hover,
-.stButton > button[data-testid="stBaseButton-primary"]:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-blue) !important;
+.stButton > button[kind="primary"]:hover {
+    background: var(--theme-accent-hover) !important;
+    box-shadow: 0 8px 24px rgba(37,99,235,0.3), inset 0 1px 0 rgba(255,255,255,0.2) !important;
 }
 
-.stButton > button[kind="secondary"],
-.stButton > button[data-testid="stBaseButton-secondary"] {
+/* Glassmorphic Metrics */
+[data-testid="stMetric"] {
+    background: var(--theme-bg-glass) !important;
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--theme-border) !important;
+    border-radius: 20px !important;
+    padding: 24px !important;
+    box-shadow: var(--shadow-md) !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+[data-testid="stMetric"]:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-float) !important;
     background: #ffffff !important;
-    color: var(--text-primary) !important;
-    border: 1px solid var(--card-border) !important;
-    border-radius: 12px !important;
+}
+[data-testid="stMetricValue"] > div {
+    font-family: 'Clash Display', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 2.5rem !important;
+    color: var(--theme-accent) !important;
+}
+[data-testid="stMetricLabel"] > div {
+    font-size: 0.9rem !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--theme-text-secondary) !important;
     font-weight: 500;
-    letter-spacing: 0.08px;
-    transition: border-color .15s, box-shadow .2s;
-}
-.stButton > button[kind="secondary"]:hover,
-.stButton > button[data-testid="stBaseButton-secondary"]:hover {
-    border-color: var(--accent) !important;
-    box-shadow: var(--shadow-blue) !important;
 }
 
-/* ─── Expanders ─── */
+/* Chat Input */
+.stChatInput > div {
+    border-radius: 24px !important;
+    border: 1px solid var(--theme-border) !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(20px) !important;
+    box-shadow: var(--shadow-lg) !important;
+    transition: all 0.4s ease !important;
+    padding: 4px 8px !important;
+}
+.stChatInput > div:focus-within {
+    border-color: var(--theme-accent) !important;
+    box-shadow: var(--shadow-float) !important;
+    transform: translateY(-2px);
+    background: #ffffff !important;
+}
+
+/* Chat Messages */
+[data-testid="stChatMessage"] {
+    background: var(--theme-bg-glass) !important;
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--theme-border);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-md);
+    animation: messageReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+[data-testid="stChatMessage"] * {
+    color: var(--theme-text-primary) !important;
+}
+
+/* Expanders & DataFrames */
 [data-testid="stExpander"] {
-    border: 1px solid var(--card-border) !important;
+    background: var(--theme-bg-glass) !important;
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--theme-border) !important;
     border-radius: 16px !important;
-    background: var(--card-bg) !important;
-    box-shadow: var(--shadow-soft) !important;
+    box-shadow: var(--shadow-sm) !important;
 }
-[data-testid="stExpander"] summary {
-    color: var(--text-primary) !important;
-    font-weight: 500 !important;
-}
-
-/* ─── Dataframes ─── */
 [data-testid="stDataFrame"] {
     border-radius: 12px;
-    border: 1px solid var(--card-border);
-    overflow: hidden;
+    border: 1px solid var(--theme-border);
+    box-shadow: var(--shadow-md);
 }
 
-/* ─── Divider ─── */
-hr {
-    border-color: var(--card-border) !important;
-}
-
-/* ─── Info / success / warning banners ─── */
-.stAlert {
-    border-radius: 12px !important;
-    border: 1px solid var(--card-border) !important;
-    color: var(--text-primary) !important;
-}
-
-/* ─── Badge pill (used in sidebar) ─── */
-.badge-pill {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 500;
-    background: var(--accent);
-    color: #ffffff;
-    letter-spacing: 0.08px;
-}
-
-/* ─── Recommendation cards ─── */
+/* Recommendation Cards */
 .rec-card {
-    background: var(--surface2);
-    border: 1px solid var(--card-border);
+    background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(248,250,252,0.8));
+    border: 1px solid rgba(37,99,235,0.1);
+    border-left: 4px solid var(--theme-accent);
     border-radius: 16px;
-    padding: 16px 20px;
-    margin-bottom: 12px;
-    font-size: 16px;
-    line-height: 1.30;
-    letter-spacing: 0.08px;
-    box-shadow: var(--shadow-soft);
-    color: var(--text-primary);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
 }
-.rec-card::before {
-    content: "💡 ";
+.rec-card:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(37,99,235,0.2);
 }
 
-/* Custom Selectbox styling for Airtable feel */
+/* Custom Selectbox */
 div[data-baseweb="select"] > div {
-    border-radius: 12px !important;
-    border-color: var(--card-border) !important;
-    background-color: var(--card-bg) !important;
-    color: var(--text-primary) !important;
+    border-radius: 14px !important;
+    border: 1px solid var(--theme-border) !important;
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: all 0.3s ease !important;
 }
 div[data-baseweb="select"] > div:hover {
-    border-color: var(--accent) !important;
+    border-color: var(--theme-accent) !important;
+    background: #ffffff !important;
 }
-div[data-baseweb="popover"] * {
-    color: var(--text-primary) !important;
+
+/* Animations */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); filter: blur(8px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes messageReveal {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Global Noise Overlay (Pointer-events none) */
+.noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
 }
 </style>
+<div class="noise-overlay"></div>
 """,
     unsafe_allow_html=True,
 )
